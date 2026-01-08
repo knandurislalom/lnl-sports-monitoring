@@ -52,7 +52,7 @@
 | Task ID | Description | Status | Assignee | Est. Hours | Dependencies |
 |---------|-------------|--------|----------|------------|-------------|
 | INFRA-001 | Create mock data service for development | 🟢 | | 2 | SETUP-001 |
-| INFRA-002 | Implement error handling utilities | 🔴 | | 2 | SETUP-001 |
+| INFRA-002 | Implement error handling utilities | 🟢 | | 2 | SETUP-001 |
 | INFRA-003 | Set up frontend configuration constants | 🟢 | | 1 | SETUP-001 |
 | INFRA-004 | Create data transformation utilities | 🔴 | | 2 | INFRA-001 |
 | INFRA-005 | Implement local storage utilities | 🔴 | | 2 | - |

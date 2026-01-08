@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '@core-config/theme.config';
 import { MainLayout } from '@app-main/components/layout';
 import { Dashboard } from '@pages-Dashboard';
+import { ErrorHandlingTestPage } from '@pages/ErrorTestPage';
 import '@core-config/../styles/design-system.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/schedule" element={<Dashboard />} />
             <Route path="/results" element={<Dashboard />} />
             <Route path="/favorites" element={<Dashboard />} />
+            <Route path="/error-test" element={<ErrorHandlingTestPage />} />
             {/* Placeholder routes - will be implemented later */}
             <Route path="/settings" element={<div>Settings Page - Coming Soon</div>} />
             <Route path="/about" element={<div>About Page - Coming Soon</div>} />
