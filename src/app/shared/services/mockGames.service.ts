@@ -1,4 +1,4 @@
-import { Game, LiveGame, CompletedGame, ScheduledGame, SportType } from '@shared-types/game.types';
+import { Game, LiveGame, CompletedGame, ScheduledGame, SportType } from '@core-types/game.types';
 import { getTeamsBySport, getTeamById } from './mockTeams.service';
 
 // Helper function to generate random scores

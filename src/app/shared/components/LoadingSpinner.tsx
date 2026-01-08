@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircularProgress, Box, Typography } from '@mui/material';
+import { CircularProgress, Box, Typography, useTheme, alpha } from '@mui/material';
 
 interface LoadingSpinnerProps {
   size?: number;
@@ -12,6 +12,8 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   message = 'Loading...',
   fullscreen = false,
 }) => {
+  const theme = useTheme();
+  
   const containerStyles = fullscreen
     ? {
         position: 'fixed' as const,
@@ -22,7 +24,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        backgroundColor: alpha(theme.palette.background.default, 0.8),
         zIndex: 9999,
       }
     : {

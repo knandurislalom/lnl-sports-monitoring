@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import { Box, Typography, Button, Alert } from '@mui/material';
 import { ErrorOutline as ErrorIcon } from '@mui/icons-material';
-import { AppError } from '@core/utils/error.utils';
+import { AppError } from '@core-utils/error.utils';
 
 interface ErrorBoundaryProps {
   children: ReactNode;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, CssBaseline, useTheme } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
-import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { ErrorBoundary } from '@shared-components/ErrorBoundary';
 
 interface MainLayoutProps {
   children?: React.ReactNode;

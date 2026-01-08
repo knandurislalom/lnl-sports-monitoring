@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Chip } from '@mui/material';
-import { formatScore } from '@core/utils/game.utils';
+import { formatScore } from '@shared-utils/game.utils';
 
 interface ScoreDisplayProps {
   homeTeam: {

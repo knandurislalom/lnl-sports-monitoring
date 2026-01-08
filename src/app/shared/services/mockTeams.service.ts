@@ -1,4 +1,4 @@
-import { Team } from '@shared-types/team.types';
+import { Team } from '@core-types/team.types';
 
 export const mockTeams: Record<string, Team[]> = {
   nfl: [

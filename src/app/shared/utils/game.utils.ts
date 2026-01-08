@@ -1,4 +1,4 @@
-import { Game, LiveGame, CompletedGame, ScheduledGame, SportType } from '@shared-types/game.types';
+import { Game, LiveGame, CompletedGame, ScheduledGame, SportType } from '@core-types/game.types';
 
 export const formatGameTime = (date: Date): string => {
   return new Intl.DateTimeFormat('en-US', {

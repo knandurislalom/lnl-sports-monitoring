@@ -1,17 +1,28 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from '@core-config/theme.config';
+import { MainLayout } from '@app-main/components/layout';
+import { Dashboard } from '@pages-Dashboard';
+import '@core-config/../styles/design-system.css';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <h1>Sports Monitoring MVP</h1>
-        <p>Welcome to the Sports Monitoring Platform</p>
-        <p>🏈 🏀 ⚾ 🏒</p>
-      </div>
+      <Router>
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/live" element={<Dashboard />} />
+            <Route path="/schedule" element={<Dashboard />} />
+            <Route path="/results" element={<Dashboard />} />
+            <Route path="/favorites" element={<Dashboard />} />
+            {/* Placeholder routes - will be implemented later */}
+            <Route path="/settings" element={<div>Settings Page - Coming Soon</div>} />
+            <Route path="/about" element={<div>About Page - Coming Soon</div>} />
+          </Routes>
+        </MainLayout>
+      </Router>
     </ThemeProvider>
   );
 }
