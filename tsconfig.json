@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    
+    /* Path mapping */
+    "baseUrl": ".",
+    "paths": {
+      "@core-api/*": ["./src/app/core/api/*"],
+      "@core-auth/*": ["./src/app/core/auth/*"],
+      "@core-config/*": ["./src/app/core/config/*"],
+      "@core-hooks/*": ["./src/app/core/hooks/*"],
+      "@core-types/*": ["./src/app/core/types/*"],
+      "@core-utils/*": ["./src/app/core/utils/*"],
+      "@app-main/*": ["./src/app/main/*"],
+      "@pages-LiveGames/*": ["./src/app/pages/LiveGames/*"],
+      "@pages-RecentGames/*": ["./src/app/pages/RecentGames/*"],
+      "@pages-UpcomingSchedule/*": ["./src/app/pages/UpcomingSchedule/*"],
+      "@pages-Login/*": ["./src/app/pages/Login/*"],
+      "@shared-components/*": ["./src/app/shared/components/*"],
+      "@shared-hooks/*": ["./src/app/shared/hooks/*"],
+      "@shared-types/*": ["./src/app/shared/types/*"],
+      "@shared-constants/*": ["./src/app/shared/constants/*"],
+      "@shared-services/*": ["./src/app/shared/services/*"],
+      "@shared-utils/*": ["./src/app/shared/utils/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
