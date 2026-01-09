@@ -83,12 +83,6 @@ const getSportIcon = (sport: string) => {
 
 const getDefaultNavigationItems = (favoriteTeams: string[] = []): NavigationItem[] => [
   {
-    id: 'dashboard',
-    label: 'Dashboard',
-    icon: DashboardIcon,
-    path: '/',
-  },
-  {
     id: 'live-games',
     label: 'Live Games',
     icon: LiveTvIcon,
@@ -98,15 +92,10 @@ const getDefaultNavigationItems = (favoriteTeams: string[] = []): NavigationItem
       color: 'error',
       variant: 'standard',
     },
-  },
-  {
-    id: 'schedule',
-    label: 'Schedule',
-    icon: ScheduleIcon,
-    path: '/schedule',
-    badge: {
-      count: 24,
-      color: 'primary',
+    chip: {
+      label: 'Live',
+      color: 'error',
+      variant: 'filled',
     },
   },
   {
@@ -114,6 +103,26 @@ const getDefaultNavigationItems = (favoriteTeams: string[] = []): NavigationItem
     label: 'Recent Games',
     icon: HistoryIcon,
     path: '/recent',
+    chip: {
+      label: 'Results',
+      color: 'success',
+      variant: 'outlined',
+    },
+  },
+  {
+    id: 'schedule',
+    label: 'Upcoming Games',
+    icon: ScheduleIcon,
+    path: '/schedule',
+    badge: {
+      count: 24,
+      color: 'primary',
+    },
+    chip: {
+      label: 'Schedule',
+      color: 'primary',
+      variant: 'outlined',
+    },
   },
   {
     id: 'divider-1',

@@ -8,6 +8,9 @@ import {
   Menu,
   MenuItem,
   Chip,
+  Tabs,
+  Tab,
+  Badge,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
@@ -16,6 +19,9 @@ import {
   Refresh as RefreshIcon,
   Settings as SettingsIcon,
   Favorite as FavoriteIcon,
+  LiveTv as LiveIcon,
+  History as HistoryIcon,
+  Schedule as ScheduleIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -24,6 +30,7 @@ export const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
   
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
@@ -46,15 +53,43 @@ export const Header: React.FC = () => {
     const path = location.pathname;
     switch (path) {
       case '/':
+      case '/live':
         return 'Live Games';
-      case '/schedule':
-        return 'Schedule';
+      case '/recent':
       case '/results':
-        return 'Results';
+        return 'Recent Games';
+      case '/schedule':
+        return 'Upcoming Schedule';
       case '/favorites':
-        return 'Favorites';
+        return 'Favorite Teams';
+      case '/settings':
+        return 'Settings';
+      case '/about':
+        return 'About';
       default:
         return 'Sports Monitor';
+    }
+  };
+
+  const getCurrentTab = () => {
+    const path = location.pathname;
+    if (path === '/' || path === '/live') return 0;
+    if (path === '/recent' || path === '/results') return 1;
+    if (path === '/schedule') return 2;
+    return 0;
+  };
+
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+    switch (newValue) {
+      case 0:
+        navigate('/live');
+        break;
+      case 1:
+        navigate('/recent');
+        break;
+      case 2:
+        navigate('/schedule');
+        break;
     }
   };
 
@@ -79,21 +114,25 @@ export const Header: React.FC = () => {
               fontWeight: 600,
               color: 'white',
               mr: 2,
+              cursor: 'pointer',
             }}
+            onClick={() => navigate('/live')}
           >
-            {isMobile ? 'Sports' : 'Sports Monitor'}
+            {isMobile ? 'NFL' : 'NFL Monitor'}
           </Typography>
           
-          {/* Page Title */}
-          <Typography
-            variant="subtitle1"
-            sx={{
-              color: 'rgba(255, 255, 255, 0.8)',
-              display: { xs: 'none', sm: 'block' },
-            }}
-          >
-            {getPageTitle()}
-          </Typography>
+          {/* Page Title for mobile */}
+          {isMobile && (
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                fontSize: '0.75rem',
+              }}
+            >
+              {getPageTitle()}
+            </Typography>
+          )}
         </Box>
 
         {/* Status Indicators */}
@@ -128,7 +167,9 @@ export const Header: React.FC = () => {
             title="Favorite Teams"
             sx={{ color: 'white' }}
           >
-            <FavoriteIcon />
+            <Badge badgeContent={3} color="error">
+              <FavoriteIcon />
+            </Badge>
           </IconButton>
 
           <IconButton
@@ -163,6 +204,45 @@ export const Header: React.FC = () => {
           </Menu>
         </Box>
       </Toolbar>
+
+      {/* Navigation Tabs */}
+      {!isMobile && (
+        <Box sx={{ bgcolor: 'rgba(255, 255, 255, 0.1)', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+          <Tabs
+            value={getCurrentTab()}
+            onChange={handleTabChange}
+            variant={isTablet ? 'fullWidth' : 'standard'}
+            sx={{
+              '& .MuiTab-root': {
+                color: 'rgba(255, 255, 255, 0.8)',
+                minHeight: 48,
+                '&.Mui-selected': {
+                  color: 'white',
+                },
+              },
+              '& .MuiTabs-indicator': {
+                backgroundColor: 'white',
+              },
+            }}
+          >
+            <Tab
+              icon={<LiveIcon />}
+              label="Live Games"
+              iconPosition="start"
+            />
+            <Tab
+              icon={<HistoryIcon />}
+              label="Recent Games"
+              iconPosition="start"
+            />
+            <Tab
+              icon={<ScheduleIcon />}
+              label="Schedule"
+              iconPosition="start"
+            />
+          </Tabs>
+        </Box>
+      )}
     </AppBar>
   );
 };

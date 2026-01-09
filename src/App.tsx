@@ -4,6 +4,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '@core-config/theme.config';
 import { MainLayout } from '@app-main/components/layout';
 import { Dashboard } from '@pages-Dashboard';
+import { LiveGamesPage } from './app/pages/LiveGamesPage';
+import { RecentGamesPage } from './app/pages/RecentGamesPage';
+import { SchedulePage } from './app/pages/SchedulePage';
 import { ErrorHandlingTestPage } from '@pages/ErrorTestPage';
 import '@core-config/../styles/design-system.css';
 
@@ -13,10 +16,11 @@ function App() {
       <Router>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/live" element={<Dashboard />} />
-            <Route path="/schedule" element={<Dashboard />} />
-            <Route path="/results" element={<Dashboard />} />
+            <Route path="/" element={<LiveGamesPage />} />
+            <Route path="/live" element={<LiveGamesPage />} />
+            <Route path="/recent" element={<RecentGamesPage />} />
+            <Route path="/schedule" element={<SchedulePage />} />
+            <Route path="/results" element={<RecentGamesPage />} />
             <Route path="/favorites" element={<Dashboard />} />
             <Route path="/error-test" element={<ErrorHandlingTestPage />} />
             {/* Placeholder routes - will be implemented later */}
