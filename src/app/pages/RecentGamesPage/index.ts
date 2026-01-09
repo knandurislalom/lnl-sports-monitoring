@@ -1,0 +1,1 @@
+export { RecentGamesPage, default } from './RecentGamesPage';

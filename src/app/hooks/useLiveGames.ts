@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Game, GameStatus } from '../shared/types/game.types';
 import { liveGameService } from '../services/LiveGameService';
+import { useCache, usePersistentState } from './useCache';
 
 // ===== LIVE GAMES HOOK =====
 
@@ -9,6 +10,7 @@ export interface UseLiveGamesOptions {
   updateInterval?: number;
   onGameUpdate?: (games: Game[]) => void;
   onError?: (error: Error) => void;
+  cacheEnabled?: boolean;
 }
 
 export interface UseLiveGamesReturn {
@@ -23,6 +25,7 @@ export interface UseLiveGamesReturn {
   getGame: (gameId: string) => Game | undefined;
   updateInterval: number;
   setUpdateInterval: (interval: number) => void;
+  isCacheLoaded: boolean;
 }
 
 export const useLiveGames = (options: UseLiveGamesOptions = {}): UseLiveGamesReturn => {
@@ -30,14 +33,29 @@ export const useLiveGames = (options: UseLiveGamesOptions = {}): UseLiveGamesRet
     autoStart = true,
     updateInterval = 5000,
     onGameUpdate,
-    onError
+    onError,
+    cacheEnabled = true
   } = options;
 
-  const [games, setGames] = useState<Game[]>([]);
+  // Cache for live games data
+  const { cachedData, setInCache, clearCache } = useCache<Game[]>({
+    key: 'live_games',
+    ttl: 30 * 1000, // 30 seconds for live data
+    enabled: cacheEnabled
+  });
+
+  // Persistent state for user preferences
+  const [persistentUpdateInterval, setPersistentUpdateInterval] = usePersistentState(
+    'live_games_update_interval',
+    updateInterval
+  );
+
+  const [games, setGames] = useState<Game[]>(cachedData || []);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentUpdateInterval, setCurrentUpdateInterval] = useState(updateInterval);
+  const [currentUpdateInterval, setCurrentUpdateInterval] = useState(persistentUpdateInterval);
+  const [isCacheLoaded, setIsCacheLoaded] = useState(!!cachedData);
   
   const unsubscribeRef = useRef<(() => void) | null>(null);
   const onGameUpdateRef = useRef(onGameUpdate);
@@ -62,6 +80,12 @@ export const useLiveGames = (options: UseLiveGamesOptions = {}): UseLiveGamesRet
         setGames(updatedGames);
         setIsLoading(false);
         setIsConnected(true);
+        setIsCacheLoaded(true);
+        
+        // Cache the updated games data
+        if (cacheEnabled) {
+          setInCache(updatedGames);
+        }
         
         // Call external callback if provided
         if (onGameUpdateRef.current) {
@@ -121,8 +145,18 @@ export const useLiveGames = (options: UseLiveGamesOptions = {}): UseLiveGamesRet
 
   const setUpdateIntervalHandler = useCallback((interval: number) => {
     setCurrentUpdateInterval(interval);
+    setPersistentUpdateInterval(interval); // Persist user preference
     liveGameService.setUpdateInterval(interval);
-  }, []);
+  }, [setPersistentUpdateInterval]);
+
+  // Load cached data on mount if cache is enabled
+  useEffect(() => {
+    if (cachedData && cachedData.length > 0) {
+      setGames(cachedData);
+      setIsLoading(false);
+      setIsCacheLoaded(true);
+    }
+  }, [cachedData]);
 
   // Auto-start if enabled
   useEffect(() => {
