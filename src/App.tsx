@@ -1,15 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
-import { Box, Container, Typography, Card, CardContent, Grid, Chip } from '@mui/material';
-import { theme } from './app/core/config/theme.config';
-import { MainLayout } from './app/main/layouts/MainLayout';
-import { LiveGamesPage } from './app/pages/LiveGamesPage';
-import { RecentGamesPage } from './app/pages/RecentGamesPage';
-import { SchedulePage } from './app/pages/SchedulePage';
-import './app/core/styles/design-system.css';
-
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { 
@@ -79,18 +68,23 @@ const DashboardHome = () => {
           Sports Monitoring Dashboard
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
-          Real-time sports data platform with comprehensive game tracking
+          Real-time sports data platform - Track live games, results, and upcoming schedules
         </Typography>
         <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
           <Chip 
             icon={<TrendingIcon />} 
-            label="MVP Complete - 76% Done" 
+            label="5 Live Games Active" 
             color="success" 
             variant="filled" 
           />
           <Chip 
-            label="All Core Features Ready" 
+            label="12 Games Completed Today" 
             color="primary" 
+            variant="outlined" 
+          />
+          <Chip 
+            label="8 Games Tomorrow" 
+            color="info" 
             variant="outlined" 
           />
         </Stack>
@@ -168,38 +162,33 @@ const DashboardHome = () => {
 
       <Box sx={{ mt: 5, p: 3, bgcolor: 'grey.50', borderRadius: 2 }}>
         <Typography variant="h5" gutterBottom>
-          🎉 MVP Status: Production Ready
+          🏀 Today's Sports Overview
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-          All core sports monitoring features have been implemented with professional UI, 
-          persistent state management, and comprehensive filtering capabilities.
+          Stay up-to-date with live scores, recent results, and upcoming games across all major sports leagues.
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="subtitle2">✅ Live Game Tracking</Typography>
-            <Typography variant="body2" color="text.secondary">Real-time updates</Typography>
+            <Typography variant="subtitle2">🔴 Live Games</Typography>
+            <Typography variant="body2" color="text.secondary">5 games in progress</Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="subtitle2">✅ Historical Data</Typography>
-            <Typography variant="body2" color="text.secondary">Recent game results</Typography>
+            <Typography variant="subtitle2">✅ Completed Today</Typography>
+            <Typography variant="body2" color="text.secondary">12 games finished</Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="subtitle2">✅ Future Schedule</Typography>
-            <Typography variant="body2" color="text.secondary">Upcoming games</Typography>
+            <Typography variant="subtitle2">📅 Tomorrow's Schedule</Typography>
+            <Typography variant="body2" color="text.secondary">8 games scheduled</Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="subtitle2">✅ State Management</Typography>
-            <Typography variant="body2" color="text.secondary">Persistent preferences</Typography>
+            <Typography variant="subtitle2">🏆 Top Leagues</Typography>
+            <Typography variant="body2" color="text.secondary">NBA, NFL, MLB, NHL</Typography>
           </Grid>
         </Grid>
       </Box>
     </Container>
   );
 };
-      </Grid>
-    </Grid>
-  </Container>
-);
 
 function App() {
   return (

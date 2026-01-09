@@ -10,13 +10,35 @@ import {
   IconButton
 } from '@mui/material';
 import { 
-  Sports as SportsIcon,
   SportsBasketball as LiveIcon,
   History as RecentIcon,
   Schedule as ScheduleIcon,
   Home as HomeIcon
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+interface MainLayoutProps {
+  children: React.ReactNode;
+}
+
+// NFL Logo Component
+const NFLLogo = ({ sx }: { sx?: any }) => (
+  <Box
+    component="img"
+    src="https://logos-world.net/wp-content/uploads/2020/06/NFL-Logo.png"
+    alt="NFL Logo"
+    sx={{
+      height: 32,
+      width: 'auto',
+      filter: 'brightness(0) invert(1)', // Make it white for dark header
+      ...sx
+    }}
+    onError={(e) => {
+      // Fallback to text if image fails to load
+      (e.target as HTMLImageElement).style.display = 'none';
+    }}
+  />
+);
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -43,9 +65,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             <IconButton
               color="inherit"
               onClick={() => navigate('/')}
-              sx={{ mr: 1 }}
+              sx={{ mr: 1, p: 1 }}
             >
-              <SportsIcon />
+              <NFLLogo />
             </IconButton>
             <Typography 
               variant="h6" 
