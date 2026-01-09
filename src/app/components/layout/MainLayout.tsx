@@ -17,8 +17,8 @@ import {
   Menu as MenuIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
 } from '@mui/icons-material';
-import { ErrorBoundary } from '../shared/ErrorBoundary';
-import { getUserPreferences, getViewPreferences } from '../core/utils/storage.utils';
+import { ErrorBoundary } from '../../shared/components/ErrorBoundary';
+import { getUserPreferences, getViewPreferences } from '../../core/utils/storage.utils';
 
 // ===== TYPES =====
 

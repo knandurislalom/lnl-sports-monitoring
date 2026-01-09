@@ -11,7 +11,7 @@ import {
   UpcomingGame 
 } from '../services/UpcomingScheduleService';
 import { Team } from '../types/Team';
-import { addDays, subDays, startOfDay, endOfDay } from 'date-fns';
+import { addDays, subDays, startOfDay, endOfDay } from '../utils/dateUtils';
 
 // ===== RECENT GAMES HOOK =====
 

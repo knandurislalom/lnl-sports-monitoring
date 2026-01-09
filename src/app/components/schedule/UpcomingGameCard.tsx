@@ -31,7 +31,7 @@ import {
   AccessTime as TimeIcon,
   Paid as MoneyIcon,
 } from '@mui/icons-material';
-import { format, formatDistanceToNow, isToday, isTomorrow } from 'date-fns';
+import { format, formatDistanceToNow, isToday, isTomorrow } from '../../utils/dateUtils';
 import { UpcomingGame } from '../../services/UpcomingScheduleService';
 
 // ===== COMPONENT PROPS INTERFACE =====

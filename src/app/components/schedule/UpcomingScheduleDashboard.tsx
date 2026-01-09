@@ -39,10 +39,6 @@ import { UpcomingGameCard } from './UpcomingGameCard';
 import { useRecentGames } from '../../hooks/useRecentGames';
 import { UpcomingGame, UpcomingScheduleFilter } from '../../services/UpcomingScheduleService';
 import { LoadingSpinner, TeamListSkeleton } from '../layout/LoadingStates';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { addDays, format, isToday, isTomorrow } from 'date-fns';
 
 // ===== TAB PANEL COMPONENT =====
 interface TabPanelProps {

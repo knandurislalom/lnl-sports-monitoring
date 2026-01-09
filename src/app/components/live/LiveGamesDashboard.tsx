@@ -22,6 +22,8 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material';
+import { PerformanceMonitorWrapper } from '../performance/PerformanceMonitor';
+import { usePerformanceMonitor } from '../../hooks/usePerformance';
 import {
   Sports as LiveIcon,
   Refresh as RefreshIcon,
@@ -39,7 +41,7 @@ import { LiveGameCard } from './LiveGameCard';
 import { LiveScoreTicker } from './LiveScoreTicker';
 import { useLiveGames } from '../../hooks/useLiveGames';
 import { useResponsive, useResponsiveGrid, useResponsiveTypography, useResponsiveSpacing } from '../../hooks/useResponsive';
-import { Game, GameStatus } from '../../types/Game';
+import { Game, GameStatus } from '../../shared/types/game.types';
 import { LoadingSpinner, TeamListSkeleton } from '../layout/LoadingStates';
 
 // ===== LIVE GAMES DASHBOARD COMPONENT =====
@@ -62,6 +64,7 @@ const LiveGamesDashboard: React.FC = () => {
   const { getOptimalColumns } = useResponsiveGrid();
   const { getHeadingVariant, getButtonSize } = useResponsiveTypography();
   const { getContainerSpacing, getCardSpacing, getSectionSpacing } = useResponsiveSpacing();
+  const performanceMetrics = usePerformanceMonitor('LiveGamesDashboard');
   
   const [tabValue, setTabValue] = useState(0);
   const [watchedGames, setWatchedGames] = useState<Set<string>>(new Set());
@@ -94,6 +97,11 @@ const LiveGamesDashboard: React.FC = () => {
       console.error('Live games error:', error);
     },
   });
+
+  // Performance monitoring in development
+  if (process.env.NODE_ENV === 'development' && performanceMetrics.isSlowRender) {
+    console.warn(`LiveGamesDashboard slow render: ${performanceMetrics.lastRenderTime.toFixed(2)}ms`);
+  }
 
   const handleGameClick = (game: Game) => {
     setSelectedGame(game);
@@ -140,16 +148,17 @@ const LiveGamesDashboard: React.FC = () => {
   const connectionStatus = getConnectionStatus();
 
   return (
-    <Box sx={{ p: getContainerSpacing(), maxWidth: 1400, mx: 'auto' }}>
-      {/* Header */}
-      <Box sx={{ mb: getSectionSpacing() }}>
-        <Box sx={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: isMobile ? 'flex-start' : 'center',
-          flexDirection: isMobile ? 'column' : 'row',
-          gap: isMobile ? 2 : 0,
-          mb: 2 
+    <PerformanceMonitorWrapper componentName="LiveGamesDashboard">
+      <Box sx={{ p: getContainerSpacing(), maxWidth: 1400, mx: 'auto' }}>
+        {/* Header */}
+        <Box sx={{ mb: getSectionSpacing() }}>
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: isMobile ? 'flex-start' : 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: isMobile ? 2 : 0,
+            mb: 2 
         }}>
           <Typography variant={getHeadingVariant(4)} gutterBottom>
             Live Games Dashboard
@@ -297,6 +306,7 @@ const LiveGamesDashboard: React.FC = () => {
             )}
           </Grid>
         </CardContent>
+      </Card>
       </Collapse>
 
       {/* Tabs */}
@@ -493,7 +503,8 @@ const LiveGamesDashboard: React.FC = () => {
           </Box>
         )}
       </TabPanel>
-    </Box>
+      </Box>
+    </PerformanceMonitorWrapper>
   );
 };
 

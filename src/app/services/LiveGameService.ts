@@ -1,4 +1,4 @@
-import { Game, GameStatus, LiveGameUpdate } from '../types/Game';
+import { Game, GameStatus, LiveGame as LiveGameUpdate } from '../shared/types/game.types';
 import { Team } from '../types/Team';
 
 // ===== MOCK TEAM DATA =====

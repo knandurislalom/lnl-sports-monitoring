@@ -41,10 +41,6 @@ import { useRecentGames } from '../../hooks/useRecentGames';
 import { useResponsive, useResponsiveGrid, useResponsiveTypography, useResponsiveSpacing } from '../../hooks/useResponsive';
 import { DetailedGameResult, RecentGamesFilter } from '../../services/RecentGamesService';
 import { LoadingSpinner, TeamListSkeleton } from '../layout/LoadingStates';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { subDays, format } from 'date-fns';
 
 // ===== TAB PANEL COMPONENT =====
 interface TabPanelProps {

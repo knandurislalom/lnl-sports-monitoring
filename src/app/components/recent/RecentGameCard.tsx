@@ -28,7 +28,7 @@ import {
   EmojiEvents as TrophyIcon,
 } from '@mui/icons-material';
 import { DetailedGameResult } from '../../services/RecentGamesService';
-import { formatDistanceToNow, format } from 'date-fns';
+import { formatDistanceToNow, format } from '../../utils/dateUtils';
 
 // ===== RECENT GAME CARD COMPONENT =====
 

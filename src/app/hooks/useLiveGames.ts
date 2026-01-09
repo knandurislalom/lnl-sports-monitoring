@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Game, GameStatus } from '../types/Game';
+import { Game, GameStatus } from '../shared/types/game.types';
 import { liveGameService } from '../services/LiveGameService';
 
 // ===== LIVE GAMES HOOK =====

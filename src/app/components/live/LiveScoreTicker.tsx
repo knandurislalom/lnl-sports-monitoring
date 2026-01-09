@@ -20,7 +20,7 @@ import {
 } from '@mui/icons-material';
 import { LiveGameCard } from './LiveGameCard';
 import { useLiveScoreTicker } from '../../hooks/useLiveGames';
-import { Game } from '../../types/Game';
+import { Game } from '../../shared/types/game.types';
 
 // ===== LIVE SCORE TICKER COMPONENT =====
 

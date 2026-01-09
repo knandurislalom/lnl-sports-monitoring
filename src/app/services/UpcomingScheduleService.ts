@@ -1,6 +1,6 @@
-import { Game, GameStatus } from '../types/Game';
+import { Game, GameStatus } from '../shared/types/game.types';
 import { Team } from '../types/Team';
-import { addDays, addHours, startOfDay, endOfDay, format, isAfter, isBefore } from 'date-fns';
+import { addDays, addHours, startOfDay, endOfDay, format, isAfter, isBefore } from '../utils/dateUtils';
 
 // ===== EXTENDED MOCK TEAM DATA =====
 const mockTeams = {

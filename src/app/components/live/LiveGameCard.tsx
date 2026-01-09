@@ -30,9 +30,9 @@ import {
   Visibility as WatchIcon,
   NotificationImportant as AlertIcon,
 } from '@mui/icons-material';
-import { Game, GameStatus } from '../types/Game';
-import { useLiveGames, useGameStats, useLiveScoreTicker } from '../hooks/useLiveGames';
-import { formatDistanceToNow } from 'date-fns';
+import { Game, GameStatus } from '../../shared/types/game.types';
+import { useLiveGames, useGameStats, useLiveScoreTicker } from '../../hooks/useLiveGames';
+import { formatDistanceToNow } from '../../utils/dateUtils';
 
 // ===== LIVE GAME CARD COMPONENT =====
 
